@@ -14,8 +14,9 @@ def slack_event():
 
   if payload:
     user_input = payload.get('text')
-    return f'you said {user_input}'
     # todo: finish this slack interface!
+    result = on_input(state, user_input, context)
+    return result[2]
   else:
     return 'you said nothing'
 if __name__ == '__main__':
