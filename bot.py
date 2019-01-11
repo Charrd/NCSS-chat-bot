@@ -21,7 +21,8 @@ STATE_SONG = 2
 STATE_ARTIST = 3
 STATE_GENRE = 4
 STATE_MOOD = 5
-STATE_NO_INFO = 6
+STATE_PLAYLIST = 6
+STATE_NO_INFO = 7
 
 # What to do when we enter a state
 def on_enter_state(state, context):
@@ -56,8 +57,8 @@ def on_input(state, user_input, context):
   #start of music bot
   elif state == "STATE_MUSIC_CHOICE":
     return music_choice_on_input(user_input, context)
-
-# ---
+  elif state == "STATE_PLAYLIST":
+    return "YAY YOU DID IT!!!!"
 # START STATE
 # The big start state that knows where to send the user.
 # ---
@@ -119,7 +120,8 @@ def music_choice_on_enter_state(context):
 
 def music_choice_on_input(user_input, context):
   music = user_input
-  return 'NO QUERY', {'music': music}, None
+  
+  return f'STATE_{music.upper()}', {'music': music}, None
 
 
 
