@@ -16,6 +16,6 @@ def slack_event():
     user_input = payload.get('text')
 
     # todo: finish this slack interface!
-
+  return 'hello world'
 if __name__ == '__main__':
-  app.run()
+  app.run(debug = True)

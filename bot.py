@@ -8,7 +8,7 @@ import random
 # Playlist
 # Mood
 
-
+TUTORS = ['d', 'f'] #need to have tutors are still later used
 # ---
 # REGISTER THE STATES
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
@@ -111,30 +111,15 @@ def music_choices_on_enter_state(context):
             "text": "What music",
             "actions": [
                 {
-                    "name": "Choice",
-                    "text": "Playlist",
-                    "type": "button",
-                    "value": "playlist"
+                    "name": "Choice", "text": "Playlist", "type": "button", "value": "playlist"
                 },{
-                    "name": "Choice",
-                    "text": "Artist",
-                    "type": "button",
-                    "value": "artist"
+                    "name": "Choice", "text": "Artist", "type": "button", "value": "artist"
                 },{
-                    "name": "Choice",
-                    "text": "Mood",
-                    "type": "button",
-                    "value": "mood"
+                    "name": "Choice", "text": "Mood", "type": "button", "value": "mood"
                 },{
-                    "name": "Choice",
-                    "text": "Genre",
-                    "type": "button",
-                    "value": "genre"
+                    "name": "Choice", "text": "Genre", "type": "button",  "value": "genre"
                 },{
-                    "name": "Choice",
-                    "text": "I'm not sure",
-                    "type": "button",
-                    "value": "IDK"
+                    "name": "Choice", "text": "I'm not sure", "type": "button", "value": "IDK"
                 },
             ]
         }
