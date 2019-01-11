@@ -147,8 +147,14 @@ def music_choice_on_input(user_input, context):
   music = user_input
   if music == 'playlist':
     state = STATE_PLAYLIST
+  elif music == 'artist':
+    state = STATE_ARTIST
+  elif music == 'mood':
+    state = STATE_MOOD
   elif music == 'genre':
     state = STATE_GENRE
+  elif music == 'IDK':
+    state = STATE_NO_INFO
   return state, {'music': music}, None
 
 def playlist_on_enter_state(context):
