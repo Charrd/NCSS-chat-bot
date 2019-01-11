@@ -25,7 +25,7 @@ STATE_NO_INFO = 5
 def on_enter_state(state, context):
   if state == STATE_NONE:
     return no_query_on_enter_state(context)
-  elif state == STATE_ARTIST:
+  elif state == "LOCKED OUT":
     return locked_out_on_enter_state(context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_enter_state(context)
