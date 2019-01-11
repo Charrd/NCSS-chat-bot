@@ -145,7 +145,9 @@ def music_choice_on_enter_state(context):
 def music_choice_on_input(user_input, context):
   music = user_input
   if music == 'playlist':
-    state = 
+    state = STATE_PLAYLIST
+  elif music == 'genre':
+    state = STATE_GENRE
   return state, {'music': music}, None
 
 def playlist_on_enter_state(context):
