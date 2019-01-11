@@ -35,9 +35,9 @@ def on_enter_state(state, context):
     return locked_out_location_on_enter_state(context)
 
   # start of music bot
-  elif state == "STATE_MUSIC_CHOICE":
+  elif state == STATE_MUSIC_CHOICE:
     return music_choice_on_enter_state(context)
-  elif state == "STATE_PLAYLIST":
+  elif state == STATE_PLAYLIST:
     return playlist_on_enter_state(context) 
   # More states here
   # elif state == ...
@@ -57,9 +57,9 @@ def on_input(state, user_input, context):
     return locked_out_location_on_input(user_input, context)
   
   #start of music bot
-  elif state == "STATE_MUSIC_CHOICE":
+  elif state == STATE_MUSIC_CHOICE:
     return music_choice_on_input(user_input, context)
-  elif state == "STATE_PLAYLIST":
+  elif state == STATE_PLAYLIST:
     return "YAY YOU DID IT!!!!"
 # START STATE
 # The big start state that knows where to send the user.
@@ -72,7 +72,7 @@ def no_query_on_input(user_input, context):
   # Check where they're locked out.
   match = re.search('music', user_input)
   if match:
-    return 'STATE_MUSIC_CHOICE', {}, None
+    return STATE_MUSIC_CHOICE, {}, None
 
   match = re.match('I am locked out( in(?P<location>.*))?', user_input)
   if match:
@@ -145,9 +145,9 @@ def music_choice_on_enter_state(context):
 def music_choice_on_input(user_input, context):
   music = user_input
   if music == 'playlist':
-    state = "STATE_PLAYLIST"
+    state = STATE_PLAYLIST
   elif music == 'genre':
-    state = "STATE_GENRE"
+    state = STATE_GENRE
   return state, {'music': music}, None
 
 def playlist_on_enter_state(context):
