@@ -1,6 +1,7 @@
 import re
 import random
 from flask import jsonify
+import json
 
 # STATES:
 # None
@@ -117,18 +118,7 @@ def locked_out_location_on_input(user_input, context):
 
 
 def music_choice_on_enter_state(context):
-  return 'How do you want to choose your music? '
-
-def music_choice_on_input(user_input, context):
-  music = user_input
-  
-  return 'STATE_PLAYLIST', {'music': music}, None
-
-def playlist_on_enter_state(context):
-  return 'please select playlist'
-
-
-"""jsonify({
+  return json.dumps({
     "text": "How do you want to choose your music? ",
     "attachments": [
         {
@@ -149,4 +139,15 @@ def playlist_on_enter_state(context):
             ]
         }
     ]
-})"""
+})"""How do you want to choose your music? """
+
+def music_choice_on_input(user_input, context):
+  music = user_input
+  if music == 'playlist':
+    state = 
+  return state, {'music': music}, None
+
+def playlist_on_enter_state(context):
+  return 'please select playlist'
+
+
