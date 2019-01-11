@@ -17,6 +17,8 @@ def on_enter_state(state, context):
     return locked_out_on_enter_state(context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_enter_state(context)
+  elif state == 'music_choices':
+    return music_choices_on_enter_state(context)
   # More states here
   # elif state == ...
 
@@ -33,6 +35,8 @@ def on_input(state, user_input, context):
     return locked_out_on_input(user_input, context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_input(user_input, context)
+  elif state == 'music_choices':
+    return music_choices_on_input(user_input, context)
   # More states here
   # elif state == ...
 
@@ -43,19 +47,13 @@ def on_input(state, user_input, context):
 # ---
 
 def no_query_on_enter_state(context):
-  return 'I am Lockout helper bot. How can I help you?'
+  return 'Hi I\'m music bot how can i help? '
 
 def no_query_on_input(user_input, context):
   # Check where they're locked out.
-  match = re.match('I am locked out( in (?P<location>.*))?', user_input)
+  match = re.search('music', user_input)
   if match:
-    location = match.group('location')
-    # If we got a location, go to the locked out + location state.
-    if location:
-      return 'LOCKED OUT LOCATION', {'location': location}, None
-    # If no location, go to the locked out state.
-    else:
-      return 'LOCKED OUT', {}, None
+    return 'music_choices', {}, None
 
   # If we didn't match any regex, go back to this start state and try again.
   else:
@@ -89,3 +87,47 @@ def locked_out_location_on_input(user_input, context):
 
 
 # --- More states go here! --- #
+
+
+def music_choices_on_enter_state(context):
+  return {
+    "text": "How do you want to choose your music? ",
+    "attachments": [
+        {
+            "callback_id": "Choice",
+            "text": "What music",
+            "actions": [
+                {
+                    "name": "Choice",
+                    "text": "Playlist",
+                    "type": "button",
+                    "value": "playlist"
+                },{
+                    "name": "Choice",
+                    "text": "Artist",
+                    "type": "button",
+                    "value": "artist"
+                },{
+                    "name": "Choice",
+                    "text": "Mood",
+                    "type": "button",
+                    "value": "mood"
+                },{
+                    "name": "Choice",
+                    "text": "Genre",
+                    "type": "button",
+                    "value": "genre"
+                },{
+                    "name": "Choice",
+                    "text": "I'm not sure",
+                    "type": "button",
+                    "value": "IDK"
+                },
+            ]
+        }
+    ]
+}
+
+def music_choices_on_input(user_input, context):
+  music = user_input
+  return 'NO QUERY', {'music': music}, None
