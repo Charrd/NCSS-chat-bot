@@ -139,7 +139,8 @@ def music_choice_on_enter_state(context):
             ]
         }
     ]
-})"""How do you want to choose your music? """
+})
+#"""How do you want to choose your music? """
 
 def music_choice_on_input(user_input, context):
   music = user_input
