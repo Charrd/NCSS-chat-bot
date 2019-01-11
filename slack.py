@@ -22,10 +22,8 @@ def slack_event():
         output += output1
       if output2 != None:
         output += output2
-      return jsonify({
-        "text": output,
-        "response_type": "in_channel"
-      })
+      output["response_type"] = "in_channel"
+      return jsonify(output)
   return ""
 if __name__ == '__main__':
   app.run(debug = True)
