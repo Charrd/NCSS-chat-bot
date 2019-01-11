@@ -12,10 +12,14 @@ def slack_event():
   print(payload)  # Print payload for debugging.
   output = ""
   if payload:
-    user_input = payload.get('text')
+    text = payload.get('text')
+    actions = payload.get('actions')
     # todo: finish this slack interface!
     while state != "END":
-      state, context, output1 = on_input(state, user_input, context)
+      if text:
+        state, context, output1 = on_input(state, text, context)
+      elif actions:
+        state, context, output1 = on_input(state, actions[0].get("value"), context)
       output2 = on_enter_state(state, context)
       if type(output2) is dict:
         output = output2
