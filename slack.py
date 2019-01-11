@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from bot import on_enter_state, on_input
 from flaskapp import app
+import json
 
 state = 'NO QUERY'
 context = {}
@@ -13,13 +14,13 @@ def slack_event():
   output = ""
   if payload:
     text = payload.get('text')
-    actions = payload.get('actions')
+    payload = payload.get('payload')
     # todo: finish this slack interface!
     while state != "END":
       if text:
         state, context, output1 = on_input(state, text, context)
-      elif actions:
-        state, context, output1 = on_input(state, actions[0].get("value"), context)
+      elif payload:
+        state, context, output1 = on_input(state, json.loads(payload).get('actions')[0].get("value"), context)
       output2 = on_enter_state(state, context)
       if type(output2) is dict:
         output = output2
