@@ -1,7 +1,12 @@
 import re
 import random
 
-TUTORS = ['Tim', 'Nicky', 'Kenni', 'Ben', 'Smerity']
+# STATES:
+# None
+# Artist
+# Song
+# Playlist
+# Mood
 
 
 # ---
@@ -9,11 +14,18 @@ TUTORS = ['Tim', 'Nicky', 'Kenni', 'Ben', 'Smerity']
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
 # ---
 
+STATE_NONE = 0
+STATE_SONG = 1
+STATE_ARTIST = 2
+STATE_GENRE = 3
+STATE_MOOD = 4
+STATE_NO_INFO = 5
+
 # What to do when we enter a state
 def on_enter_state(state, context):
-  if state == 'NO QUERY':
+  if state == STATE_NONE:
     return no_query_on_enter_state(context)
-  elif state == 'LOCKED OUT':
+  elif state == STATE_ARTIST:
     return locked_out_on_enter_state(context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_enter_state(context)
@@ -86,6 +98,7 @@ def locked_out_location_on_enter_state(context):
 
 def locked_out_location_on_input(user_input, context):
   return 'END', {}, 'Bye!'
+
 
 
 # --- More states go here! --- #
