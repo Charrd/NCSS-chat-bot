@@ -121,7 +121,7 @@ def music_choice_on_enter_state(context):
 def music_choice_on_input(user_input, context):
   music = user_input
   
-  return f'STATE_{music.upper()}', {'music': music}, None
+  return 'STATE_PLAYLIST', {'music': music}, None
 
 
 
