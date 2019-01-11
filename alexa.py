@@ -8,7 +8,7 @@ context = {}
 @app.route('/alexa', methods=['GET', 'POST'])
 def alexa_event():
   global state, context
-  payload = request.values
+  payload = request.get_json()
   print(payload)  # Print payload for debugging.
   output = ""
   if payload:
@@ -26,7 +26,8 @@ def alexa_event():
       'response': {
         'outputSpeech': {
         'type': 'PlainText',
-        'text': 'output'
+        'text': 'output',
+        'shouldEndSession': False
         }
       }
       })
