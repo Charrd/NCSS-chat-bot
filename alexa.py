@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from bot import on_enter_state, on_input
-
-app = Flask(__name__)
+from flaskapp import app
 
 state = 'NO QUERY'
 context = {}
@@ -23,8 +22,13 @@ def alexa_event():
         output += output2
       #todo change to alexa format
       return jsonify({
-        "text": output,
-        "response_type": "in_channel"
+      'version': '0.1',
+      'response': {
+        'outputSpeech': {
+        'type': 'PlainText',
+        'text': 'output'
+        }
+      }
       })
   return ""
 if __name__ == '__main__':
