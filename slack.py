@@ -11,13 +11,16 @@ def slack_event():
   global state, context
   payload = request.values
   print(payload)  # Print payload for debugging.
-
+  output = ""
   if payload:
     user_input = payload.get('text')
     # todo: finish this slack interface!
-    result = on_input(state, user_input, context)
-    return result[2]
-  else:
-    return 'you said nothing'
+    resultstate, resultcontext, resultoutput = on_input(state, user_input, context)
+    resultoutput2 = on_enter_state(resultstate, resultcontext)
+    if resultoutput != None:
+      output += resultoutput
+    if resultoutput2 != None:
+      output += resultoutput2
+  return output
 if __name__ == '__main__':
   app.run(debug = True)
