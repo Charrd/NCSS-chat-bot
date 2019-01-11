@@ -15,12 +15,14 @@ def slack_event():
   if payload:
     user_input = payload.get('text')
     # todo: finish this slack interface!
-    resultstate, resultcontext, resultoutput = on_input(state, user_input, context)
-    resultoutput2 = on_enter_state(resultstate, resultcontext)
-    if resultoutput != None:
-      output += resultoutput
-    if resultoutput2 != None:
-      output += resultoutput2
-  return output
+    while state != "END":
+      state, context, output1 = on_input(state, user_input, context)
+      output2 = on_enter_state(state, context)
+      if output1 != None:
+        output += output1
+      if output2 != None:
+        output += output2
+      return output
+  return ""
 if __name__ == '__main__':
   app.run(debug = True)
