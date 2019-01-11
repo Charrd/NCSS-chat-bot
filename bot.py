@@ -68,7 +68,7 @@ def no_query_on_input(user_input, context):
   # Check where they're locked out.
   match = re.search('music', user_input)
   if match:
-    return 'music_choices', {}, None
+    return 'STATE_MUSIC_CHOICE', {}, None
 
   match = re.match('I am locked out( in(?P<location>.*))?', user_input)
   if match:
