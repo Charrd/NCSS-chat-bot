@@ -32,7 +32,7 @@ def on_enter_state(state, context):
     return locked_out_location_on_enter_state(context)
   
   # start of music bot
-  elif state == STATE_MUSIC_CHOICE:
+  elif state == "STATE_MUSIC_CHOICE":
     return music_choice_on_enter_state(context)
   
   # More states here
@@ -42,7 +42,7 @@ def on_enter_state(state, context):
 def on_input(state, user_input, context):
   # First up, if they're trying to quit, then quit.
   if user_input == 'quit':
-    return 'END', {}, 'Bye!'
+    return 'NO QUERY', {}, 'Bye!'
 
   # Otherwise, check the state.
   if state == 'NO QUERY':
@@ -53,7 +53,7 @@ def on_input(state, user_input, context):
     return locked_out_location_on_input(user_input, context)
   
   #start of music bot
-  elif state == STATE_MUSIC_CHOICE:
+  elif state == "STATE_MUSIC_CHOICE":
     return music_choice_on_input(user_input, context)
 
 # ---
@@ -106,7 +106,7 @@ def locked_out_location_on_enter_state(context):
   return f'{tutor} will be at {location} right away!'
 
 def locked_out_location_on_input(user_input, context):
-  return 'END', {}, 'Bye!'
+  return 'NO QUERY', {}, 'Bye!'
 
 
 
