@@ -114,14 +114,7 @@ def locked_out_location_on_input(user_input, context):
 
 
 def music_choice_on_enter_state(context):
-  return 'How do you want to choose your music? '
-
-def music_choice_on_input(user_input, context):
-  music = user_input
-  return 'NO QUERY', {'music': music}, None
-
-
-"""{
+  return {
     "text": "How do you want to choose your music? ",
     "attachments": [
         {
@@ -142,5 +135,12 @@ def music_choice_on_input(user_input, context):
             ]
         }
     ]
-}"""
+}
+
+def music_choice_on_input(user_input, context):
+  music = user_input
+  return 'NO QUERY', {'music': music}, None
+
+
+
 
