@@ -32,11 +32,12 @@ def on_enter_state(state, context):
     return locked_out_on_enter_state(context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_enter_state(context)
-  
+
   # start of music bot
   elif state == "STATE_MUSIC_CHOICE":
     return music_choice_on_enter_state(context)
-  
+  elif state == "STATE_PLAYLIST":
+    return playlist_on_enter_state(context) 
   # More states here
   # elif state == ...
 
@@ -123,7 +124,8 @@ def music_choice_on_input(user_input, context):
   
   return 'STATE_PLAYLIST', {'music': music}, None
 
-
+def playlist_on_enter_state(context):
+  return 'please select playlist'
 
 
 """jsonify({
