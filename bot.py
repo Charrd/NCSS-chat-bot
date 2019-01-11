@@ -156,7 +156,7 @@ def music_choice_on_input(user_input, context):
     state = STATE_NO_INFO
   return state, {'music': music}, None
 
-def playlist_on_enter_state(context):
+def playlist_on_enter_state(user_input, context):
   return 'please select playlist'
 
 
