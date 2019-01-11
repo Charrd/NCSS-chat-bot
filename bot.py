@@ -67,6 +67,14 @@ def no_query_on_input(user_input, context):
   if match:
     return 'music_choices', {}, None
 
+  match = re.match('I am locked out( in(?P<location>.*))?', user_input)
+  if match:
+    location = match.group('location')
+    if location:
+      return 'LOCKED OUT LOCATION', {'location': location}, None
+    else:
+      return 'LOCKED OUT', {}, None
+
   # If we didn't match any regex, go back to this start state and try again.
   else:
     return 'NO QUERY', {}, 'Sorry, I don\'t understand!'
