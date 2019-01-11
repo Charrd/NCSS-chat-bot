@@ -14,23 +14,27 @@ TUTORS = ['d', 'f'] #need to have tutors are still later used
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
 # ---
 
-STATE_NONE = 0
-STATE_SONG = 1
-STATE_ARTIST = 2
-STATE_GENRE = 3
-STATE_MOOD = 4
-STATE_NO_INFO = 5
+STATE_NO_QUERY = 0
+STATE_MUSIC_CHOICE = 1
+STATE_SONG = 2
+STATE_ARTIST = 3
+STATE_GENRE = 4
+STATE_MOOD = 5
+STATE_NO_INFO = 6
 
 # What to do when we enter a state
 def on_enter_state(state, context):
-  if state == STATE_NONE:
+  if state == "NO QUERY":
     return no_query_on_enter_state(context)
   elif state == "LOCKED OUT":
     return locked_out_on_enter_state(context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_enter_state(context)
-  elif state == 'music_choices':
-    return music_choices_on_enter_state(context)
+  
+  # start of music bot
+  elif state == STATE_MUSIC_CHOICE:
+    return music_choice_on_enter_state(context)
+  
   # More states here
   # elif state == ...
 
@@ -47,11 +51,10 @@ def on_input(state, user_input, context):
     return locked_out_on_input(user_input, context)
   elif state == 'LOCKED OUT LOCATION':
     return locked_out_location_on_input(user_input, context)
-  elif state == 'music_choices':
-    return music_choices_on_input(user_input, context)
-  # More states here
-  # elif state == ...
-
+  
+  #start of music bot
+  elif state == STATE_MUSIC_CHOICE:
+    return music_choice_on_input(user_input, context)
 
 # ---
 # START STATE
@@ -59,7 +62,7 @@ def on_input(state, user_input, context):
 # ---
 
 def no_query_on_enter_state(context):
-  return 'Hi I\'m music bot how can i help? '
+  return 'Hi I\'m Eve how can I help? '
 
 def no_query_on_input(user_input, context):
   # Check where they're locked out.
@@ -110,8 +113,15 @@ def locked_out_location_on_input(user_input, context):
 # --- More states go here! --- #
 
 
-def music_choices_on_enter_state(context):
-  return {
+def music_choice_on_enter_state(context):
+  return 'How do you want to choose your music? '
+
+def music_choice_on_input(user_input, context):
+  music = user_input
+  return 'NO QUERY', {'music': music}, None
+
+
+"""{
     "text": "How do you want to choose your music? ",
     "attachments": [
         {
@@ -132,8 +142,5 @@ def music_choices_on_enter_state(context):
             ]
         }
     ]
-}
+}"""
 
-def music_choices_on_input(user_input, context):
-  music = user_input
-  return 'NO QUERY', {'music': music}, None
