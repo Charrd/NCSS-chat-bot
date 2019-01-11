@@ -12,9 +12,9 @@ def alexa_event():
   print(payload)  # Print payload for debugging.
   output = ""
   if payload:
-    request_type = data['request']['type']
+    request_type = payload['request']['type']
     if request_type == 'IntentRequest':
-      query = data['request']['intent']['slots']['query']['value']
+      query = payload['request']['intent']['slots']['query']['value']
       user_input = query
       while state != "END":
         state, context, output1 = on_input(state, user_input, context)
