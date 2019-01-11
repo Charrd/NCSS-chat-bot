@@ -118,8 +118,9 @@ def locked_out_location_on_input(user_input, context):
 
 
 def music_choice_on_enter_state(context):
-  return json.dumps({
+  return {
     "text": "How do you want to choose your music? ",
+    "response_type": "in_channel",
     "attachments": [
         {
             "callback_id": "Choice",
@@ -139,7 +140,7 @@ def music_choice_on_enter_state(context):
             ]
         }
     ]
-})
+}
 #"""How do you want to choose your music? """
 
 def music_choice_on_input(user_input, context):
