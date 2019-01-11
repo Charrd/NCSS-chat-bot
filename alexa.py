@@ -12,7 +12,7 @@ def alexa_event():
   print(payload)  # Print payload for debugging.
   output = ""
   if payload:
-    user_input = payload.get('text')
+    user_input = payload.get('text', '')
     while state != "END":
       state, context, output1 = on_input(state, user_input, context)
       output2 = on_enter_state(state, context)
