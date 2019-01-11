@@ -20,7 +20,11 @@ def slack_event():
       if text:
         state, context, output1 = on_input(state, text, context)
       elif payload:
-        state, context, output1 = on_input(state, json.loads(payload).get('actions')[0].get("value"), context)
+         json_payload = json.loads(payload)
+         actions = json_payload.get('actions')
+         first_action = actions[0]
+         value = first_action.get("value")
+         state, context, output1 = on_input(state, value, context)
       output2 = on_enter_state(state, context)
       if type(output2) is dict:
         output = output2
