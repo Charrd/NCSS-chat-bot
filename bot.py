@@ -40,13 +40,13 @@ def on_enter_state(state, context):
   elif state == STATE_PLAYLIST:
     return playlist_on_enter_state(context) 
   elif state == STATE_ARTIST:
-    return playlist_on_enter_state(context)
+    return artist_on_enter_state(context)
   elif state == STATE_GENRE:
-    return playlist_on_enter_state(context)
+    return genre_on_enter_state(context)
   elif state == STATE_SONG:
-    return playlist_on_enter_state(context)
+    return song_on_enter_state(context)
   elif state == STATE_NO_INFO:
-    return playlist_on_enter_state(context)
+    return IDK_on_enter_state(context)
   # More states here
   # elif state == ...
 
@@ -175,7 +175,7 @@ def music_choice_on_input(user_input, context):
 def playlist_on_enter_state(context):
   return "please select a playlist"
 def artist_on_enter_state(context):
-  return "please select a artist"
+  return "please select an artist"
 def song_on_enter_state(context):
   return "please select a song"
 def genre_on_enter_state(context):
