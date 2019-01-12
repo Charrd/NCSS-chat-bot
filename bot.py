@@ -89,7 +89,7 @@ def no_query_on_enter_state(context):
   return 'Hi I\'m Eve how can I help? '
 
 def no_query_on_input(user_input, context):
-  search = re.search('music', user_input)
+  search = re.search('music', user_input, re.I)
   if search:
     return STATE_MUSIC_CHOICE, {}, None
 
@@ -208,7 +208,7 @@ def playlist_on_input(user_input, context):
   headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
   response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...\n'
 
 def artist_on_input(user_input, context):
   song = requests.get(track_by_name('wannabe spice girls'))
@@ -216,7 +216,7 @@ def artist_on_input(user_input, context):
   headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
   response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...\n'
 
 def song_on_input(user_input, context):
   song = requests.get(track_by_name(user_input))
@@ -232,7 +232,7 @@ def genre_on_input(user_input, context):
   headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
   response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...\n'
 
 def IDK_on_input(user_input, context):
   song = requests.get(track_by_name('wannabe spice girls'))
