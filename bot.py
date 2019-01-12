@@ -236,7 +236,7 @@ def IDK_on_input(user_input, context):
 
 def party_type_on_enter_state(context):
   party_type = context["party_type"]
-  return f"please select: *buttons coming soon!*"
+  return f"please select: _buttons coming soon!_"
 
 def party_type_on_input(user_input, context):
   return STATE_NO_QUERY, {}, "thanks for selecting"
