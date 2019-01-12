@@ -58,15 +58,9 @@ def alexa_event():
                 state, context, output1 = on_input(state, user_input, context)
                 output2 = on_enter_state(state, context)['text']
                 if output1 != None:
-                    if 'list' in output1:
-                        output += jsonify(render_list(output1))
-                    else:
-                        output += output1 + ' '
-                if output2 != None:
-                    if 'list' in output1:
-                        output += jsonify(render_list(output2))
-                    else:                    
-                        output += output2
+                    output += output1 + ' '
+                if output2 != None:  
+                    output += output2
         else:
             output = 'Hi, I\'m Eve, how can i help?'
 
