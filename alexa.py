@@ -27,7 +27,7 @@ def alexa_event():
                 output_alexa = output['alexa_params']
                 output_alexa['text'] = output['text']
         else:
-            output = 'Hi, I\'m Eve, how can i help?'
+            output_alexa = 'Hi, I\'m Eve, how can i help?'
 
       
         return jsonify({
