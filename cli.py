@@ -1,6 +1,6 @@
-from bot import on_enter_state, on_input
+from bot import on_enter_state, on_input, STATE_NO_QUERY
 
-state = 'NO QUERY'
+state = STATE_NO_QUERY
 context = None
 
 while state != 'END':

@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request
-from bot import on_enter_state, on_input
+from bot import on_enter_state, on_input, STATE_NO_QUERY
 from flaskapp import app
 import json
 
-state = 'NO QUERY'
+state = STATE_NO_QUERY
 context = {}
 
 @app.route('/slack/slash', methods=['GET', 'POST'])
