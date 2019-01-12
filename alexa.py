@@ -76,8 +76,8 @@ def alexa_event():
           'outputSpeech': {
           'type': 'PlainText',
           'text': output,
-          'directives': directives,
           },
+          'directives': directives,
           'shouldEndSession': False
         }
         })
