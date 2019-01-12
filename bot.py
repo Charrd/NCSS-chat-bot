@@ -4,6 +4,7 @@ from flask import jsonify
 import json
 import spotify
 import requests
+from spotify import track_by_name
 
 # STATES:
 # None
