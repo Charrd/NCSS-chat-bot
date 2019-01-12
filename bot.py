@@ -69,6 +69,14 @@ def on_input(state, user_input, context):
     return music_choice_on_input(user_input, context)
   elif state == STATE_PLAYLIST:
     return playlist_on_input(user_input, context)
+  elif state == STATE_ARTIST:
+    return playlist_on_input(user_input, context)
+  elif state == STATE_GENRE:
+    return playlist_on_input(user_input, context)
+  elif state == STATE_SONG:
+    return playlist_on_input(user_input, context)
+  elif state == STATE_INFO:
+    return playlist_on_input(user_input, context)
 # START STATE
 # The big start state that knows where to send the user.
 # ---
