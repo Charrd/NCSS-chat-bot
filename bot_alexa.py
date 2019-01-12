@@ -26,6 +26,7 @@ STATE_MOOD = 5
 STATE_PLAYLIST = 6
 STATE_NO_INFO = 7
 STATE_PARTY_TYPE = 8
+STATE_PLAY = 9
 
 # What to do when we enter a state
 def on_enter_state(state, context):
@@ -34,6 +35,9 @@ def on_enter_state(state, context):
   # start of music bot
   elif state == STATE_MUSIC_CHOICE:
     return music_choice_on_enter_state(context)
+  elif state == STATE_PLAY:
+    return song_play_on_enter_state(context)
+
 
   # More states here
   # elif state == ...
@@ -88,9 +92,28 @@ def music_choice_on_enter_state(context):
     }
 
 def music_choice_on_input(user_input, context):
-  song = requests.get(spotify.track_by_name(user_input))
+  song = spotify.track_by_name(user_input)
+  return STATE_PLAY, {'song': song} , 'thanks for selecting'
 
-  headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+def song_play_on_enter_state(context):
+  return {
 
-  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , 'thanks for selecting'
+        "type": "AudioPlayer.Play",
+
+        "playBehavior": "REPLACE_ALL",
+
+        "audioItem": {
+
+          "stream": {
+
+            "token": "string",
+
+            "url": context['song'],
+
+            "offsetInMilliseconds": 10
+
+          }
+
+        }
+
+      }
