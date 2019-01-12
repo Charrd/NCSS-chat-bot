@@ -27,6 +27,7 @@ STATE_MOOD = 5
 STATE_PLAYLIST = 6
 STATE_NO_INFO = 7
 STATE_PARTY_TYPE = 8
+STATE_PLAY = 9
 
 # What to do when we enter a state
 def on_enter_state(state, context):
@@ -138,9 +139,6 @@ def music_choice_on_enter_state(context):
   "alexa_params": {
 
     }
-
-
-    
 }
 
 def music_choice_on_input(user_input, context):
@@ -216,7 +214,7 @@ def song_on_input(user_input, context):
   headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
   response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , 'thanks for selecting'
+  return STATE_PLAY, {} , 'thanks for selecting'
 
 def genre_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
