@@ -1,9 +1,5 @@
 from flask import Flask, jsonify, request
-<<<<<<< HEAD
-from bot_alexa import on_enter_state, on_input
-=======
-from bot import on_enter_state, on_input, STATE_NO_QUERY
->>>>>>> 28291fcee1d83d346f33b1e6fe67b6734d24a465
+from bot_alexa import on_enter_state, on_input, STATE_NO_QUERY
 from flaskapp import app
 
 state = STATE_NO_QUERY
