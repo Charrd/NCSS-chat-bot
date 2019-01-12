@@ -213,8 +213,8 @@ def song_on_input(user_input, context):
 
   headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
-  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song[0].content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , f'Playing {song[1]}...'
+  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
+  return STATE_NO_QUERY, {} , 'Playing...'
 
 def genre_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
