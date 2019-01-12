@@ -96,7 +96,7 @@ def music_choice_on_input(user_input, context):
   return STATE_PLAY, {'song': song} , 'thanks for selecting'
 
 def song_play_on_enter_state(context):
-  return {
+  return {"directives": {
 
         "type": "AudioPlayer.Play",
 
@@ -116,4 +116,4 @@ def song_play_on_enter_state(context):
 
         }
 
-      }
+      }}

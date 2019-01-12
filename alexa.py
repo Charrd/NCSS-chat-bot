@@ -48,6 +48,7 @@ def alexa_event():
     payload = request.get_json()
     print(payload)  # Print payload for debugging.
     output = ""
+    directives = []
     if payload:
         request_type = payload['request']['type']
         if request_type == 'IntentRequest':
@@ -56,11 +57,15 @@ def alexa_event():
             #what does this do 
             if state != "END":
                 state, context, output1 = on_input(state, user_input, context)
-                output2 = on_enter_state(state, context)['text']
+                output2 = on_enter_state(state, context)
                 if output1 != None:
-                    output += output1 + ' '
-                if output2 != None:  
-                    output += output2
+                    output += output1["text"] + ' '
+                if "text" in output2:
+                    if output2["text"] != None:  
+                        output += output2["text"]
+                if "directives" in output2:
+                    directives.append(output2["directives"])
+
         else:
             output = 'Hi, I\'m Eve, how can i help?'
 
@@ -71,6 +76,7 @@ def alexa_event():
           'outputSpeech': {
           'type': 'PlainText',
           'text': output,
+          'directives': directives,
           },
           'shouldEndSession': False
         }
