@@ -11,6 +11,14 @@ import json
 # Mood
 
 TUTORS = ['d', 'f'] #need to have tutors are still later used
+
+PARTIES = [
+          {'text' : 'Dinner', 'value' : 'dinner'}, 
+          {'text': 'Birthday', 'value' : 'birthday'}, 
+          {'text' : 'Pool', "value": 'pool'}, 
+          {'text' : 'Dance', 'value' : 'dance'}, 
+          {'text': 'House', 'value': 'house'}
+          ]
 # ---
 # REGISTER THE STATES
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
@@ -181,7 +189,25 @@ def song_on_enter_state(context):
 def genre_on_enter_state(context):
   return "please select a genre"
 def IDK_on_enter_state(context):
-  return "please select a IDK"
+  return {
+    "text": "What type of party? ",
+    "response_type": "in_channel",
+    "attachments": [
+        {
+            "callback_id": "party_select",
+            "text": "select party",
+            "fallback": "You didn’t select a party :(.",
+            "actions": [
+                {
+                    "name": "party",
+                    "type": "select",
+                    "options": PARTIES
+                }
+            ]
+        }
+    ]
+}
+
 
 def playlist_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
