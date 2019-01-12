@@ -106,11 +106,12 @@ def no_query_on_input(user_input, context):
 # --- More states go here! --- #
 
 
-def music_choice_on_enter_state(context):
+def music_choice_on_enter_state(context):a
   return {
     "text": "How do you want to choose your music? ",
-    "response_type": "in_channel",
-    "attachments": [
+    "slack_params": {
+      "response_type": "in_channel",
+      "attachments": [
         {
             "callback_id": "Choice",
             "text": "What music",
@@ -127,8 +128,9 @@ def music_choice_on_enter_state(context):
                     "name": "Choice", "text": "I'm not sure", "type": "button", "value": "IDK"
                 },
             ]
-        }
-    ]
+          }
+      ]
+    }
 }
 
 def music_choice_on_input(user_input, context):

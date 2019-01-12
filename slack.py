@@ -30,7 +30,8 @@ def slack_event():
       output2 = on_enter_state(state, context)
       if type(output2) is dict:
         print("return Type: dict")
-        output = output2
+        output = output2['slack_params']
+        output['text'] = output2['text']
         return jsonify(output)
 
       elif type(output2) is str or output2 == None:
