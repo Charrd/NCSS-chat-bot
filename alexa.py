@@ -27,17 +27,16 @@ def alexa_event():
       output = 'Hi, I\'m Eve, how can i help?'
 
     
-      #todo change to alexa format
-      return jsonify({
-      'version': '0.1',
-      'response': {
-        'outputSpeech': {
-        'type': 'PlainText',
-        'text': output,
-        'shouldEndSession': False
-        }
-      }
-      })
+    return jsonify({
+    'version': '0.1',
+    'response': {
+      'outputSpeech': {
+      'type': 'PlainText',
+      'text': output,
+      },
+      'shouldEndSession': False
+    }
+    })
   return ""
 if __name__ == '__main__':
   app.run(debug = True)
