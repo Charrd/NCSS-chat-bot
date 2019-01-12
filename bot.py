@@ -87,7 +87,6 @@ def no_query_on_enter_state(context):
   return 'Hi I\'m Eve how can I help? '
 
 def no_query_on_input(user_input, context):
-  # Check where they're locked out.
   search = re.search('music', user_input)
   if search:
     return STATE_MUSIC_CHOICE, {}, None
@@ -98,9 +97,9 @@ def no_query_on_input(user_input, context):
     return STATE_NO_QUERY, {}, 'Sorry, I don\'t understand!'
 
 
-# ---
+# ------------
 # OTHER STATES
-# ---
+# ------------
 
 
 
@@ -136,7 +135,7 @@ def music_choice_on_enter_state(context):
 
 #alexa version to be edited
   "alexa_params": {
-      
+      "How do you want to choose your music?"
     }
 
 
