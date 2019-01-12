@@ -58,8 +58,8 @@ def alexa_event():
             if state != "END":
                 state, context, output1 = on_input(state, user_input, context)
                 output2 = on_enter_state(state, context)
-                if output1['text'] != None:
-                    output += output1["text"] + ' '
+                if output1 != None:
+                    output += output1 + ' '
                 if "text" in output2:
                     if output2["text"] != None:  
                         output += output2["text"]
