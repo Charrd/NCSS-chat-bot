@@ -35,7 +35,7 @@ def alexa_event():
         'response': {
           'outputSpeech': {
           'type': 'PlainText',
-          'text': output,
+          'text': output_alexa,
           },
           'shouldEndSession': False
         }
