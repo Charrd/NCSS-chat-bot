@@ -2,6 +2,8 @@ import re
 import random
 from flask import jsonify
 import json
+import spotify
+import requests
 
 # STATES:
 # None
@@ -196,12 +198,21 @@ def IDK_on_enter_state(context):
 
 def playlist_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
+
 def artist_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
+
 def song_on_input(user_input, context):
+  song = requests.get(track_by_name(user_input))
+
+  headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+
+  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
   return STATE_NO_QUERY, {} , 'thanks for selecting'
+
 def genre_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
+
 def IDK_on_input(user_input, context):
   party_type = user_input
   return STATE_PARTY_TYPE, {'party_type': party_type}, None
@@ -210,7 +221,6 @@ def IDK_on_input(user_input, context):
 def party_type_on_enter_state(context):
   party_type = context["party_type"]
   return f"please select: _buttons coming soon!_"
-## {}
 
 def party_type_on_input(user_input, context):
   return STATE_NO_QUERY, {}, "thanks for selecting"
