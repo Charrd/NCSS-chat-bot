@@ -47,6 +47,7 @@ def alexa_event():
     global state, context
     payload = request.get_json()
     print(payload)  # Print payload for debugging.
+    response_dict = {"shouldEndSession": False}
     output = ""
     directives = []
     if payload:
@@ -69,17 +70,15 @@ def alexa_event():
         else:
             output = 'Hi, I\'m Eve, how can i help?'
 
+        if output:
+            response_dict["outputSpeech"] = {"type": "PlainText", "text": output}
+        if directives:
+            response_dict["directives"] = directives
+
       
         return jsonify({
         'version': '0.1',
-        'response': {
-          'outputSpeech': {
-          'type': 'PlainText',
-          'text': output,
-          },
-          'directives': directives,
-          'shouldEndSession': False
-        }
+        'response': response_dict
         })
     return ""
 
