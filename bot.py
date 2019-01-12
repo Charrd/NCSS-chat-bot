@@ -12,13 +12,7 @@ import json
 
 TUTORS = ['d', 'f'] #need to have tutors are still later used
 
-PARTIES = [
-          {'text' : 'Dinner Party', 'value' : 'dinner'}, 
-          {'text': 'Birthday Party', 'value' : 'birthday'}, 
-          {'text' : 'Pool Party', "value": 'pool'}, 
-          {'text' : 'Dance Party', 'value' : 'dance'}, 
-          {'text': 'House Party', 'value': 'house'}
-          ]
+
 # ---
 # REGISTER THE STATES
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
@@ -210,7 +204,13 @@ def IDK_on_enter_state(context):
                 {
                     "name": "party",
                     "type": "select",
-                    "options": PARTIES
+                    "options": [
+                            {'text' : 'Dinner Party', 'value' : 'dinner'}, 
+                            {'text': 'Birthday Party', 'value' : 'birthday'}, 
+                            {'text' : 'Pool Party', "value": 'pool'}, 
+                            {'text' : 'Dance Party', 'value' : 'dance'}, 
+                            {'text': 'House Party', 'value': 'house'}
+                            ]
                 }
             ]
         }
@@ -236,7 +236,7 @@ def IDK_on_input(user_input, context):
 
 def party_type_on_enter_state(context):
   party_type = context["party_type"]
-  return f"please select a playlist {party_type}"
+  return f"please select: *buttons coming soon!*"
 
 def party_type_on_input(user_input, context):
   return STATE_NO_QUERY, {}, "thanks for selecting"
