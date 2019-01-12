@@ -24,6 +24,8 @@ def alexa_event():
                     output += output1 + ' '
                 if output2 != None:
                     output += output2
+                output_alexa = output['alexa_params']
+                output_alexa['text'] = output['text']
         else:
             output = 'Hi, I\'m Eve, how can i help?'
 
