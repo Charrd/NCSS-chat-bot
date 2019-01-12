@@ -32,6 +32,7 @@ STATE_GENRE = 4
 STATE_MOOD = 5
 STATE_PLAYLIST = 6
 STATE_NO_INFO = 7
+STATE_PARTY_TYPE = 8
 
 # What to do when we enter a state
 def on_enter_state(state, context):
@@ -209,6 +210,9 @@ def IDK_on_enter_state(context):
 }
 
 
+
+
+
 def playlist_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
 def artist_on_input(user_input, context):
@@ -218,4 +222,11 @@ def song_on_input(user_input, context):
 def genre_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
 def IDK_on_input(user_input, context):
-  return STATE_NO_QUERY, {} , 'thanks for selecting'
+  party_type = user_input
+  return STATE_PARTY_TYPE, {'party_type': party_type}, None
+
+
+def party_type_on_enter_state(context):
+  party_type = context["party_type"]
+  return f"please select a playlist {party_type}"
+
