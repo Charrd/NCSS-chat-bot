@@ -13,11 +13,11 @@ import json
 TUTORS = ['d', 'f'] #need to have tutors are still later used
 
 PARTIES = [
-          {'text' : 'Dinner', 'value' : 'dinner'}, 
-          {'text': 'Birthday', 'value' : 'birthday'}, 
-          {'text' : 'Pool', "value": 'pool'}, 
-          {'text' : 'Dance', 'value' : 'dance'}, 
-          {'text': 'House', 'value': 'house'}
+          {'text' : 'Dinner Party', 'value' : 'dinner'}, 
+          {'text': 'Birthday Party', 'value' : 'birthday'}, 
+          {'text' : 'Pool Party', "value": 'pool'}, 
+          {'text' : 'Dance Party', 'value' : 'dance'}, 
+          {'text': 'House Party', 'value': 'house'}
           ]
 # ---
 # REGISTER THE STATES
@@ -195,7 +195,7 @@ def IDK_on_enter_state(context):
     "attachments": [
         {
             "callback_id": "party_select",
-            "text": "select party",
+            "text": "Select Party",
             "fallback": "You didn’t select a party :(.",
             "actions": [
                 {
