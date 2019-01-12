@@ -34,54 +34,6 @@ def tracks_by_playlist(playlist, limit=50):
     pprint.pprint(results)
     tracks = {}
 
-
-
-# -----------------------------------
-# ----- TEMP BOT IMPLEMENTATION -----
-# -----------------------------------
-
-STATE_NO_QUERY = 0
-STATE_MUSIC_CHOICE = 1
-STATE_SONG = 2
-STATE_ARTIST = 3
-STATE_GENRE = 4
-STATE_MOOD = 5
-STATE_PLAYLIST = 6
-STATE_NO_INFO = 7
-
-def on_input(state, user_input, context):
-    if user_input == 'quit':
-        return STATE_NO_QUERY, {}, 'BYE'
-    
-    if state == STATE_ARTIST:
-        return track_artist_on_enter_state(context)
-
-
-def track_artist_on_enter_state(context):
-    return track_by_name(context)
-
-def artist_on_enter_state(context):
-    return 'Which song?'
-
-
-
-# def upload(file, channel)
-#   options = {
-#     token: @team.bot["bot_access_token"],
-#     file: File.new("./tmp/composed/#{file.timestamp}", 'rb'),
-#     filename: "composed_" + file.name,
-#     title: "Composed " + file.title,
-#     channels: channel
-#   }
-
-#   res = RestClient.post 'https://slack.com/api/files.upload', options
-#   json_response = JSON.parse(res.body)
-
-#   # Return the uploaded file's ID
-#   thread_ts = json_response["file"]["shares"]["private"][channel]["ts"]
-#   file_id = json_response["file"]["id"]
-# end
-
 song = requests.get(track_by_name('wannabe spice girls'))
 
 headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
