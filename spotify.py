@@ -34,10 +34,10 @@ def tracks_by_playlist(playlist, limit=50):
     pprint.pprint(results)
     tracks = {}
 
-song = requests.get(track_by_name('wannabe spice girls'))
+# song = requests.get(track_by_name('wannabe spice girls'))
 
-headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+# headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
-response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
+# response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
 
-print(response.json())
+# print(response.json())
