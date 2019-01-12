@@ -203,10 +203,20 @@ def IDK_on_enter_state(context):
 
 
 def playlist_on_input(user_input, context):
-  return STATE_NO_QUERY, {} , 'thanks for selecting'
+  song = requests.get(track_by_name('wannabe spice girls'))
+
+  headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+
+  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
 
 def artist_on_input(user_input, context):
-  return STATE_NO_QUERY, {} , 'thanks for selecting'
+  song = requests.get(track_by_name('wannabe spice girls'))
+
+  headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+
+  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
 
 def song_on_input(user_input, context):
   song = requests.get(track_by_name(user_input))
@@ -214,14 +224,23 @@ def song_on_input(user_input, context):
   headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
 
   response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
-  return STATE_NO_QUERY, {} , 'Playing...'
+  return STATE_NO_QUERY, {} , 'Playing...\n'
 
 def genre_on_input(user_input, context):
-  return STATE_NO_QUERY, {} , 'thanks for selecting'
+  song = requests.get(track_by_name('wannabe spice girls'))
+
+  headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+
+  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
 
 def IDK_on_input(user_input, context):
-  party_type = user_input
-  return STATE_PARTY_TYPE, {'party_type': party_type}, None
+  song = requests.get(track_by_name('wannabe spice girls'))
+
+  headers = {'Authorization': 'Bearer xoxb-498969795956-521435106288-iXazpPMO1WCj08WEoWVwCAHH'}
+
+  response = requests.post('https://api.slack.com/api/files.upload', files={'file': song.content}, headers=headers, data={'channels': '#general', 'filetype': 'mp3'})
+  return STATE_NO_QUERY, {} , 'Playing \'Wannabe\' by Spice Girls as you asked...'
 
 
 def party_type_on_enter_state(context):
