@@ -107,8 +107,7 @@ def no_query_on_input(user_input, context):
 
 # --- More states go here! --- #
 
-
-def music_choice_on_enter_state(context):a
+def music_choice_on_enter_state(context):
   return {
     "text": "How do you want to choose your music? ",
     "slack_params": {
@@ -132,11 +131,11 @@ def music_choice_on_enter_state(context):a
             ]
           }
       ]
-    }
+    },
 
 
 #alexa version to be edited
-    "alexa_params": {
+  "alexa_params": {
       
     }
 
