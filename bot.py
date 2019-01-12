@@ -56,8 +56,11 @@ def on_enter_state(state, context):
     return song_on_enter_state(context)
   elif state == STATE_NO_INFO:
     return IDK_on_enter_state(context)
+  elif state == STATE_PARTY_TYPE:
+    return party_type_on_enter_state(context)
   # More states here
   # elif state == ...
+  raise NotImplementedError(f"Invalid state for on enter {state}")
 
 # What to do when we receive input while in a state
 def on_input(state, user_input, context):
@@ -86,6 +89,11 @@ def on_input(state, user_input, context):
     return song_on_input(user_input, context)
   elif state == STATE_NO_INFO:
     return IDK_on_input(user_input, context)
+  elif state == STATE_PARTY_TYPE:
+    return party_type_on_input(user_input, context)
+
+
+  raise NotImplementedError(f"Invalid state for on input {state}")
 # START STATE
 # The big start state that knows where to send the user.
 # ---
@@ -230,3 +238,5 @@ def party_type_on_enter_state(context):
   party_type = context["party_type"]
   return f"please select a playlist {party_type}"
 
+def party_type_on_input(user_input, context):
+  return STATE_NO_QUERY, {}, "thanks for selecting"
