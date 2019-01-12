@@ -93,7 +93,7 @@ def music_choice_on_enter_state(context):
 
 def music_choice_on_input(user_input, context):
   song = spotify.track_by_name(user_input)
-  return STATE_PLAY, {'song': song} , 'thanks for selecting'
+  return STATE_PLAY, {'song': song} , None
 
 def song_play_on_enter_state(context):
   return {"directives": {
