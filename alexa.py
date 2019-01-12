@@ -19,13 +19,11 @@ def alexa_event():
             #what does this do 
             if state != "END":
                 state, context, output1 = on_input(state, user_input, context)
-                output2 = on_enter_state(state, context)
+                output2 = on_enter_state(state, context)['alexa_params']
                 if output1 != None:
                     output += output1 + ' '
                 if output2 != None:
                     output += output2
-                output_alexa = output['alexa_params']
-                output_alexa['text'] = output['text']
         else:
             output_alexa = 'Hi, I\'m Eve, how can i help?'
 
