@@ -135,7 +135,7 @@ def music_choice_on_enter_state(context):
 
 #alexa version to be edited??
   "alexa_params": {
-
+    
     }
 
 
@@ -157,19 +157,19 @@ def music_choice_on_input(user_input, context):
   return state, {'music': music}, None
 
 def playlist_on_enter_state(context):
-  return {'text' : "please select a playlist",
+  return {'text' : "please type a playlist",
           'slack_params': {}
   }
 def artist_on_enter_state(context):
-  return {'text':"please select an artist",
+  return {'text':"please type an artist",
           'slack_params': {}
   }
 def song_on_enter_state(context):
-  return {'text':"please select a song",
+  return {'text':"please type a song",
           'slack_params': {}
   }
 def genre_on_enter_state(context):
-  return {'text':"please select a genre",
+  return {'text':"please type a genre",
           'slack_params': {}
   }
 def IDK_on_enter_state(context):
