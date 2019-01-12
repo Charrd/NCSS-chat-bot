@@ -10,6 +10,15 @@ import json
 # Playlist
 # Mood
 
+TUTORS = ['d', 'f'] #need to have tutors are still later used
+
+PARTIES = [
+          {'text' : 'Dinner', 'value' : 'dinner'}, 
+          {'text': 'Birthday', 'value' : 'birthday'}, 
+          {'text' : 'Pool', "value": 'pool'}, 
+          {'text' : 'Dance', 'value' : 'dance'}, 
+          {'text': 'House', 'value': 'house'}
+          ]
 # ---
 # REGISTER THE STATES
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
@@ -23,12 +32,16 @@ STATE_GENRE = 4
 STATE_MOOD = 5
 STATE_PLAYLIST = 6
 STATE_NO_INFO = 7
-STATE_PARTY_TYPE = 8
+
 
 # What to do when we enter a state
 def on_enter_state(state, context):
-  if state == STATE_NO_QUERY:
+  if state == "NO QUERY":
     return no_query_on_enter_state(context)
+  elif state == "LOCKED OUT":
+    return locked_out_on_enter_state(context)
+  elif state == 'LOCKED OUT LOCATION':
+    return locked_out_location_on_enter_state(context)
 
   # start of music bot
   elif state == STATE_MUSIC_CHOICE:
@@ -43,21 +56,22 @@ def on_enter_state(state, context):
     return song_on_enter_state(context)
   elif state == STATE_NO_INFO:
     return IDK_on_enter_state(context)
-  elif state == STATE_PARTY_TYPE:
-    return party_type_on_enter_state(context)
   # More states here
   # elif state == ...
-  raise NotImplementedError(f"Invalid state for on enter {state}")
 
 # What to do when we receive input while in a state
 def on_input(state, user_input, context):
   # First up, if they're trying to quit, then quit.
   if user_input == 'quit':
-    return STATE_NO_QUERY, {}, 'Bye! \n'
+    return 'NO QUERY', {}, 'Bye!'
 
   # Otherwise, check the state.
-  if state == STATE_NO_QUERY:
+  if state == 'NO QUERY':
     return no_query_on_input(user_input, context)
+  elif state == 'LOCKED OUT':
+    return locked_out_on_input(user_input, context)
+  elif state == 'LOCKED OUT LOCATION':
+    return locked_out_location_on_input(user_input, context)
   
   #start of music bot
   elif state == STATE_MUSIC_CHOICE:
@@ -72,11 +86,6 @@ def on_input(state, user_input, context):
     return song_on_input(user_input, context)
   elif state == STATE_NO_INFO:
     return IDK_on_input(user_input, context)
-  elif state == STATE_PARTY_TYPE:
-    return party_type_on_input(user_input, context)
-
-
-  raise NotImplementedError(f"Invalid state for on input {state}")
 # START STATE
 # The big start state that knows where to send the user.
 # ---
@@ -86,20 +95,47 @@ def no_query_on_enter_state(context):
 
 def no_query_on_input(user_input, context):
   # Check where they're locked out.
-  search = re.search('music', user_input)
-  if search:
+  match = re.search('music', user_input)
+  if match:
     return STATE_MUSIC_CHOICE, {}, None
 
+  match = re.match('I am locked out( in(?P<location>.*))?', user_input)
+  if match:
+    location = match.group('location')
+    if location:
+      return 'LOCKED OUT LOCATION', {'location': location}, None
+    else:
+      return 'LOCKED OUT', {}, None
 
   # If we didn't match any regex, go back to this start state and try again.
   else:
-    return STATE_NO_QUERY, {}, 'Sorry, I don\'t understand!'
+    return 'NO QUERY', {}, 'Sorry, I don\'t understand!'
 
 
 # ---
 # OTHER STATES
 # ---
 
+# TODO: Replace these states with your project's cool states
+
+# LOCKED OUT state
+def locked_out_on_enter_state(context):
+  return 'Where are you locked out?'
+
+def locked_out_on_input(user_input, context):
+  # Store the full response text as the location.
+  location = user_input
+  return 'LOCKED OUT LOCATION', {'location': location}, None
+
+
+# LOCKED OUT LOCATION state
+def locked_out_location_on_enter_state(context):
+  location = context['location']
+  tutor = random.choice(TUTORS)
+  return f'{tutor} will be at {location} right away!'
+
+def locked_out_location_on_input(user_input, context):
+  return 'NO QUERY', {}, 'Bye!'
 
 
 
@@ -160,27 +196,18 @@ def IDK_on_enter_state(context):
     "attachments": [
         {
             "callback_id": "party_select",
-            "text": "Select Party",
+            "text": "select party",
             "fallback": "You didn’t select a party :(.",
             "actions": [
                 {
                     "name": "party",
                     "type": "select",
-                    "options": [
-                            {'text' : 'Dinner Party', 'value' : 'dinner'}, 
-                            {'text': 'Birthday Party', 'value' : 'birthday'}, 
-                            {'text' : 'Pool Party', "value": 'pool'}, 
-                            {'text' : 'Dance Party', 'value' : 'dance'}, 
-                            {'text': 'House Party', 'value': 'house'}
-                            ]
+                    "options": PARTIES
                 }
             ]
         }
     ]
 }
-
-
-
 
 
 def playlist_on_input(user_input, context):
@@ -192,14 +219,4 @@ def song_on_input(user_input, context):
 def genre_on_input(user_input, context):
   return STATE_NO_QUERY, {} , 'thanks for selecting'
 def IDK_on_input(user_input, context):
-  party_type = user_input
-  return STATE_PARTY_TYPE, {'party_type': party_type}, None
-
-
-def party_type_on_enter_state(context):
-  party_type = context["party_type"]
-  return f"please select: _buttons coming soon!_"
-## {}
-
-def party_type_on_input(user_input, context):
-  return STATE_NO_QUERY, {}, "thanks for selecting"
+  return STATE_NO_QUERY, {} , 'thanks for selecting'
