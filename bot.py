@@ -10,9 +10,6 @@ import json
 # Playlist
 # Mood
 
-TUTORS = ['d', 'f'] #need to have tutors are still later used
-
-
 # ---
 # REGISTER THE STATES
 # Connects our states (eg. 'LOCKED OUT') with our functions (eg. locked_out_on_enter_state)
@@ -30,12 +27,8 @@ STATE_PARTY_TYPE = 8
 
 # What to do when we enter a state
 def on_enter_state(state, context):
-  if state == "NO QUERY":
+  if state == STATE_NO_QUERY:
     return no_query_on_enter_state(context)
-  elif state == "LOCKED OUT":
-    return locked_out_on_enter_state(context)
-  elif state == 'LOCKED OUT LOCATION':
-    return locked_out_location_on_enter_state(context)
 
   # start of music bot
   elif state == STATE_MUSIC_CHOICE:
@@ -60,15 +53,11 @@ def on_enter_state(state, context):
 def on_input(state, user_input, context):
   # First up, if they're trying to quit, then quit.
   if user_input == 'quit':
-    return 'NO QUERY', {}, 'Bye!'
+    return STATE_NO_QUERY, {}, 'Bye! \n'
 
   # Otherwise, check the state.
-  if state == 'NO QUERY':
+  if state == STATE_NO_QUERY:
     return no_query_on_input(user_input, context)
-  elif state == 'LOCKED OUT':
-    return locked_out_on_input(user_input, context)
-  elif state == 'LOCKED OUT LOCATION':
-    return locked_out_location_on_input(user_input, context)
   
   #start of music bot
   elif state == STATE_MUSIC_CHOICE:
@@ -97,47 +86,20 @@ def no_query_on_enter_state(context):
 
 def no_query_on_input(user_input, context):
   # Check where they're locked out.
-  match = re.search('music', user_input)
-  if match:
+  search = re.search('music', user_input)
+  if search:
     return STATE_MUSIC_CHOICE, {}, None
 
-  match = re.match('I am locked out( in(?P<location>.*))?', user_input)
-  if match:
-    location = match.group('location')
-    if location:
-      return 'LOCKED OUT LOCATION', {'location': location}, None
-    else:
-      return 'LOCKED OUT', {}, None
 
   # If we didn't match any regex, go back to this start state and try again.
   else:
-    return 'NO QUERY', {}, 'Sorry, I don\'t understand!'
+    return STATE_NO_QUERY, {}, 'Sorry, I don\'t understand!'
 
 
 # ---
 # OTHER STATES
 # ---
 
-# TODO: Replace these states with your project's cool states
-
-# LOCKED OUT state
-def locked_out_on_enter_state(context):
-  return 'Where are you locked out?'
-
-def locked_out_on_input(user_input, context):
-  # Store the full response text as the location.
-  location = user_input
-  return 'LOCKED OUT LOCATION', {'location': location}, None
-
-
-# LOCKED OUT LOCATION state
-def locked_out_location_on_enter_state(context):
-  location = context['location']
-  tutor = random.choice(TUTORS)
-  return f'{tutor} will be at {location} right away!'
-
-def locked_out_location_on_input(user_input, context):
-  return 'NO QUERY', {}, 'Bye!'
 
 
 
