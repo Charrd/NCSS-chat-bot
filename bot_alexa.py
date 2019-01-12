@@ -57,6 +57,8 @@ def on_input(state, user_input, context):
   elif state == STATE_MUSIC_CHOICE:
     return music_choice_on_input(user_input, context)
 
+  elif state == STATE_PLAY:
+    return STATE_NO_QUERY, {}, 'Ok! playing music'
 
   raise NotImplementedError(f"Invalid state for on input {state}")
 # START STATE
