@@ -133,9 +133,9 @@ def music_choice_on_enter_state(context):
     },
 
 
-#alexa version to be edited
+#alexa version to be edited??
   "alexa_params": {
-      "How do you want to choose your music?"
+
     }
 
 
@@ -157,37 +157,46 @@ def music_choice_on_input(user_input, context):
   return state, {'music': music}, None
 
 def playlist_on_enter_state(context):
-  return "please select a playlist"
+  return {'text' : "please select a playlist",
+          'slack_params': {}
+  }
 def artist_on_enter_state(context):
-  return "please select an artist"
+  return {'text':"please select an artist",
+          'slack_params': {}
+  }
 def song_on_enter_state(context):
-  return "please select a song"
+  return {'text':"please select a song",
+          'slack_params': {}
+  }
 def genre_on_enter_state(context):
-  return "please select a genre"
+  return {'text':"please select a genre",
+          'slack_params': {}
+  }
 def IDK_on_enter_state(context):
   return {
     "text": "What type of party? ",
-    "response_type": "in_channel",
-    "attachments": [
-        {
-            "callback_id": "party_select",
-            "text": "Select Party",
-            "fallback": "You didn’t select a party :(.",
-            "actions": [
-                {
-                    "name": "party",
-                    "type": "select",
-                    "options": [
-                            {'text' : 'Dinner Party', 'value' : 'dinner'}, 
-                            {'text': 'Birthday Party', 'value' : 'birthday'}, 
-                            {'text' : 'Pool Party', "value": 'pool'}, 
-                            {'text' : 'Dance Party', 'value' : 'dance'}, 
-                            {'text': 'House Party', 'value': 'house'}
-                            ]
-                }
-            ]
-        }
-    ]
+    "slack_params": {"response_type": "in_channel",
+      "attachments": [
+          {
+              "callback_id": "party_select",
+              "text": "Select Party",
+              "fallback": "You didn’t select a party :(.",
+              "actions": [
+                  {
+                      "name": "party",
+                      "type": "select",
+                      "options": [
+                              {'text' : 'Dinner Party', 'value' : 'dinner'}, 
+                              {'text': 'Birthday Party', 'value' : 'birthday'}, 
+                              {'text' : 'Pool Party', "value": 'pool'}, 
+                              {'text' : 'Dance Party', 'value' : 'dance'}, 
+                              {'text': 'House Party', 'value': 'house'}
+                              ]
+                  }
+              ]
+          }
+      ]
+    }
 }
 
 

@@ -19,13 +19,13 @@ def alexa_event():
             #what does this do 
             if state != "END":
                 state, context, output1 = on_input(state, user_input, context)
-                output2 = on_enter_state(state, context)['alexa_params']
+                output2 = on_enter_state(state, context)['text']
                 if output1 != None:
                     output += output1 + ' '
                 if output2 != None:
                     output += output2
         else:
-            output_alexa = 'Hi, I\'m Eve, how can i help?'
+            output = 'Hi, I\'m Eve, how can i help?'
 
       
         return jsonify({
@@ -33,7 +33,7 @@ def alexa_event():
         'response': {
           'outputSpeech': {
           'type': 'PlainText',
-          'text': output_alexa,
+          'text': output,
           },
           'shouldEndSession': False
         }
