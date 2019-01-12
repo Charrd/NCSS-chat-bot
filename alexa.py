@@ -16,13 +16,14 @@ def alexa_event():
     if request_type == 'IntentRequest':
       query = payload['request']['intent']['slots']['query']['value']
       user_input = query
-      while state != "END":
-        state, context, output1 = on_input(state, user_input, context)
-        output2 = on_enter_state(state, context)
-        if output1 != None:
-          output += output1
-        if output2 != None:
-          output += output2
+      #what does this do 
+      #while state != "END":
+      state, context, output1 = on_input(state, user_input, context)
+      output2 = on_enter_state(state, context)
+      if output1 != None:
+        output += output1
+      if output2 != None:
+        output += output2
     else:
       output = 'Hi, I\'m Eve, how can i help?'
 
