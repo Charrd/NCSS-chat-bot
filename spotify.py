@@ -15,7 +15,7 @@ def track_by_name(track):
 
     for track in results:
         if track['preview_url']:
-            return track['preview_url']
+            return (track['preview_url'], track['name'])
 
 def tracks_by_artist(artist, limit=50):
     results = spotify.search(q=f'artist: {artist}', type='track', limit=limit)['tracks']['items']
